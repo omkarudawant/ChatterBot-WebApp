@@ -5,7 +5,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
-    <h1>Flask Chatterbot Example</h1>
+    <center>
+    <h1>Simple Chatbot webapp</h1>
     <h3>A web implementation of <a href="https://github.com/gunthercox/ChatterBot">ChatterBot</a> using Flask.</h3>
     <div>
       <div id="chatbox">
@@ -15,28 +16,29 @@
         <input id="textInput" type="text" name="msg" placeholder="Message">
         <input id="buttonInput" type="submit" value="Send">
       </div>
-      <script>
-        function getBotResponse() {
-          var rawText = $("#textInput").val();
-          var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
-          $("#textInput").val("");
-          $("#chatbox").append(userHtml);
-          document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
-          $.get("/get", { msg: rawText }).done(function(data) {
-            var botHtml = '<p class="botText"><span>' + data + '</span></p>';
-            $("#chatbox").append(botHtml);
+        <script>
+          function getBotResponse() {
+            var rawText = $("#textInput").val();
+            var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
+            $("#textInput").val("");
+            $("#chatbox").append(userHtml);
             document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+            $.get("/get", { msg: rawText }).done(function(data) {
+              var botHtml = '<p class="botText"><span>' + data + '</span></p>';
+              $("#chatbox").append(botHtml);
+              document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+            });
+          }
+          $("#textInput").keypress(function(e) {
+              if(e.which == 13) {
+                  getBotResponse();
+              }
           });
-        }
-        $("#textInput").keypress(function(e) {
-            if(e.which == 13) {
-                getBotResponse();
-            }
-        });
-        $("#buttonInput").click(function() {
-          getBotResponse();
-        })
-      </script>
-    </div>
+          $("#buttonInput").click(function() {
+            getBotResponse();
+          })
+        </script>
+       </div>
+    </center>
   </body>
 </html>
