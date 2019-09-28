@@ -26,3 +26,7 @@ english_bot = ChatBot("English Bot",
 ```
 
 where `mongodb_name` is the name of the database you wish to connect to and `mongodb_uri` is the URI of a remote instance of MongoDB.
+
+If anyone is facing issues with `PyYAML` please use following command before installing the requirements,
+
+`pip install --ignore-installed PyYAML`
